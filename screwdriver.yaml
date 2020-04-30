@@ -1,0 +1,21 @@
+cache:
+   event: [ sample.txt ]
+shared:
+  image: node:12
+
+jobs:
+  test:
+    requires: [ ~commit, ~pr ]
+    steps:
+      - check: cat sample.txt || true
+      - echo: echo "This is test job" > sample.txt
+  no-cache:
+    requires: [ test ]
+    cache: false
+    steps:
+      - check: cat sample.txt || true
+      - echo: echo "This job is not cached" > sample.txt
+  cached:
+    requires: [ no-cache ]
+    steps:
+      - check: cat sample.txt || true
