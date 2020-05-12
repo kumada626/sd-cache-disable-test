@@ -5,7 +5,7 @@ shared:
 
 jobs:
   test:
-    requires: [ ~commit, ~pr ]
+    requires: [ ~commit, ~pr, ~commit:/kumada626/ ]
     steps:
       - check: cat sample.txt || true
       - echo: echo "This is test job" > sample.txt
