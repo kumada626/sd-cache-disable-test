@@ -5,7 +5,7 @@ shared:
 
 jobs:
   test:
-    requires: [ ~commit, ~pr, ~commit:/kumada626/ ]
+    # requires: [ ~commit, ~pr, ~commit:/kumada626/ ]
     steps:
       - check: cat sample.txt || true
       - echo: echo "This is test job" > sample.txt
@@ -19,3 +19,9 @@ jobs:
     requires: [ no-cache ]
     steps:
       - check: cat sample.txt || true
+  test-secrets:
+    requires: [ ~commit ]
+    steps:
+      - echo: echo $HOGEFUGA
+    secrets:
+      - HOGEFUGA
